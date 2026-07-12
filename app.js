@@ -97,3 +97,23 @@ const state = {
 function sanitiseId(raw) {
   return String(raw).replace(/[^a-zA-Z0-9\-_]/g, '').slice(0, 40) || 'element';
 }
+
+function el(tag, attrs = {}, text = null) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'className') node.className = v;
+    else node.setAttribute(k, v);
+  }
+  if (text !== null) node.textContent = text;
+  return node;
+}
+
+function append(parent, ...children) {
+  for (const c of children) parent.appendChild(c);
+  return parent;
+}
+
+function renderPresetGrid(targetId, showAll) {
+  const grid = document.getElementById(targetId);
+  if (!grid) return;
+  grid.replaceChildren();
