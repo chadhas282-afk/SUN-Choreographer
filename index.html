@@ -118,3 +118,23 @@
         
         <div class="panel">
           <div class="panel-header">
+            <h3>Fine-Tune</h3>
+            <span class="panel-desc">Overrides</span>
+          </div>
+          <div class="panel-content">
+            <div class="tuning-controls" id="step-tuning">
+              <div class="tuning-group">
+                <div class="tuning-label"><span>Origin Direction</span></div>
+                <div class="dir-controls" role="radiogroup">
+                  <button type="button" class="dir-btn active" data-dir="up" title="Bottom Up">⬆️</button>
+                  <button type="button" class="dir-btn" data-dir="down" title="Top Down">⬇️</button>
+                  <button type="button" class="dir-btn" data-dir="left" title="Right to Left">⬅️</button>
+                  <button type="button" class="dir-btn" data-dir="right" title="Left to Right">➡️</button>
+                  <button type="button" class="dir-btn" data-dir="center" title="Center Expand">🗜️</button>
+                </div>
+              </div>
+
+              <div class="tuning-group">
+                <div class="tuning-label"><span>Speed</span><span id="val-speed">1.0x</span></div>
+                <input type="range" id="range-speed" min="0.1" max="3.0" step="0.1" value="1.0" class="pro-slider">
+              </div>
