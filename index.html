@@ -78,3 +78,23 @@
       <section class="stage">
         <div class="stage-toolbar">
           <span>Live Preview</span>
+          </div>
+        <div class="stage-canvas">
+          <div class="preview-container" id="tool-output-panel" aria-live="polite">
+            <div class="output-empty" id="output-empty">
+              <div class="output-empty-icon" aria-hidden="true"><img src="logo.jpg" style="height: 48px; width: 48px; border-radius: 8px; object-fit: cover;" alt="SUN Logo"/></div>
+              <p>Add elements & click Generate</p>
+            </div>
+            
+            <div class="output-loading" id="output-loading" style="display:none; text-align:center; padding: 4rem 2rem;">
+              <div class="loading-spinner" style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-blue); display: inline-block; animation: spin 2s linear infinite;"><img src="logo.jpg" style="height: 48px; width: 48px; border-radius: 8px; object-fit: cover;" alt="SUN Logo"/></div>
+              <p style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">SUN is generating...</p>
+            </div>
+            
+            <div class="output-content" id="output-content" style="display:none;"></div>
+          </div>
+        </div>
+      </section>
+
+      
+      <aside class="sidebar right-sidebar">
