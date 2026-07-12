@@ -38,3 +38,23 @@ const PRESETS = {
     baseDelay: 10, baseDuration: 100,
     easingName: 'Linear Snap', easingCB: 'cubic-bezier(0, 0, 1, 1)', cbValues: [0, 0, 1, 1],
     staggerType: 'linear', staggerStep: 80, overlapRatio: 0.1, distance: 10, scaleFrom: 0.98,
+    },
+  float: {
+    emoji: '🎈', label: 'Float', color: '#818cf8', bg: 'rgba(129,140,248,0.15)',
+    baseDelay: 300, baseDuration: 1400,
+    easingName: 'Sine In-Out', easingCB: 'cubic-bezier(0.37, 0, 0.63, 1)', cbValues: [0.37, 0, 0.63, 1],
+    staggerType: 'decelerating', staggerStep: 200, overlapRatio: 0.75, distance: 15, scaleFrom: 0.98,
+  },
+  heavy: {
+    emoji: '🪨', label: 'Heavy', color: '#78716c', bg: 'rgba(120,113,108,0.15)',
+    baseDelay: 80, baseDuration: 500,
+    easingName: 'Ease In', easingCB: 'cubic-bezier(0.55, 0.085, 0.68, 0.53)', cbValues: [0.55, 0.085, 0.68, 0.53],
+    staggerType: 'linear', staggerStep: 120, overlapRatio: 0.2, distance: 100, scaleFrom: 1.0,
+  },
+  
+  snappy: { emoji: '⚡', label: 'Snappy', color: '#22d3ee', bg: 'rgba(34,211,238,0.15)', baseDelay: 40, baseDuration: 280, easingName: 'Back Out', easingCB: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)', cbValues: [0.175, 0.885, 0.32, 1.275], staggerType: 'linear', staggerStep: 50, overlapRatio: 0.65, distance: 24, scaleFrom: 0.85 },
+  dreamy: { emoji: '☁️', label: 'Dreamy', color: '#c084fc', bg: 'rgba(192,132,252,0.15)', baseDelay: 400, baseDuration: 1800, easingName: 'Ultra Slow', easingCB: 'cubic-bezier(0.25, 1, 0.5, 1)', cbValues: [0.25, 1, 0.5, 1], staggerType: 'decelerating', staggerStep: 300, overlapRatio: 0.9, distance: 12, scaleFrom: 0.99 },
+  stiff: { emoji: '📐', label: 'Stiff', color: '#94a3b8', bg: 'rgba(148,163,184,0.15)', baseDelay: 100, baseDuration: 300, easingName: 'Hard Quad', easingCB: 'cubic-bezier(0.5, 1, 0.89, 1)', cbValues: [0.5, 1, 0.89, 1], staggerType: 'linear', staggerStep: 100, overlapRatio: 0, distance: 0, scaleFrom: 1 },
+  lush: { emoji: '🌿', label: 'Lush', color: '#4ade80', bg: 'rgba(74,222,128,0.15)', baseDelay: 140, baseDuration: 850, easingName: 'Soft Expo', easingCB: 'cubic-bezier(0.19, 1, 0.22, 1)', cbValues: [0.19, 1, 0.22, 1], staggerType: 'accelerating', staggerStep: 110, overlapRatio: 0.8, distance: 25, scaleFrom: 0.9 },
+  jello: { emoji: '🍮', label: 'Jello', color: '#f43f5e', bg: 'rgba(244,63,94,0.15)', baseDelay: 90, baseDuration: 750, easingName: 'Wobble', easingCB: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)', cbValues: [0.68, -0.55, 0.27, 1.55], staggerType: 'linear', staggerStep: 80, overlapRatio: 0.3, distance: 15, scaleFrom: 0.88 },
+  pulse: { emoji: '💓', label: 'Pulse', color: '#e11d48', bg: 'rgba(225,29,72,0.15)', baseDelay: 60, baseDuration: 500, easingName: 'Heartbeat', easingCB: 'cubic-bezier(0.25, 1.5, 0.5, 1)', cbValues: [0.25, 1.5, 0.5, 1], staggerType: 'linear', staggerStep: 60, overlapRatio: 0.5, distance: 5, scaleFrom: 0.7 },
