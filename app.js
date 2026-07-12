@@ -78,3 +78,22 @@ const PRESETS = {
       staggerType: i % 2 === 0 ? 'linear' : 'accelerating', staggerStep: 50 + i, overlapRatio: 0.5 + (i % 4)*0.1, distance: 10 + i, scaleFrom: 0.8 + (i%5)*0.05
     };
     return acc;
+    }, {})
+};
+
+const TYPE_DEFAULTS = {
+  heading: 'slide-up',  text: 'fade',    button: 'scale',
+  image:   'slide-left', card: 'slide-up', icon: 'scale',
+  nav:     'slide-down', badge: 'scale',
+};
+
+const state = {
+  elements: [],
+  preset: 'cinematic',
+  tuning: { speed: 1.0, distance: 1.0, overlap: 1.0 },
+  direction: 'up', 
+};
+
+function sanitiseId(raw) {
+  return String(raw).replace(/[^a-zA-Z0-9\-_]/g, '').slice(0, 40) || 'element';
+}
