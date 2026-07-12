@@ -58,3 +58,23 @@ const PRESETS = {
   lush: { emoji: '🌿', label: 'Lush', color: '#4ade80', bg: 'rgba(74,222,128,0.15)', baseDelay: 140, baseDuration: 850, easingName: 'Soft Expo', easingCB: 'cubic-bezier(0.19, 1, 0.22, 1)', cbValues: [0.19, 1, 0.22, 1], staggerType: 'accelerating', staggerStep: 110, overlapRatio: 0.8, distance: 25, scaleFrom: 0.9 },
   jello: { emoji: '🍮', label: 'Jello', color: '#f43f5e', bg: 'rgba(244,63,94,0.15)', baseDelay: 90, baseDuration: 750, easingName: 'Wobble', easingCB: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)', cbValues: [0.68, -0.55, 0.27, 1.55], staggerType: 'linear', staggerStep: 80, overlapRatio: 0.3, distance: 15, scaleFrom: 0.88 },
   pulse: { emoji: '💓', label: 'Pulse', color: '#e11d48', bg: 'rgba(225,29,72,0.15)', baseDelay: 60, baseDuration: 500, easingName: 'Heartbeat', easingCB: 'cubic-bezier(0.25, 1.5, 0.5, 1)', cbValues: [0.25, 1.5, 0.5, 1], staggerType: 'linear', staggerStep: 60, overlapRatio: 0.5, distance: 5, scaleFrom: 0.7 },
+  swing: { emoji: '🏌️', label: 'Swing', color: '#fbbf24', bg: 'rgba(251,191,36,0.15)', baseDelay: 110, baseDuration: 650, easingName: 'Back Both', easingCB: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)', cbValues: [0.68, -0.55, 0.27, 1.55], staggerType: 'decelerating', staggerStep: 120, overlapRatio: 0.6, distance: 30, scaleFrom: 1.1 },
+  fade: { emoji: '🌫️', label: 'Fade', color: '#cbd5e1', bg: 'rgba(203,213,225,0.15)', baseDelay: 50, baseDuration: 400, easingName: 'Linear Fade', easingCB: 'cubic-bezier(0.4, 0, 0.2, 1)', cbValues: [0.4, 0, 0.2, 1], staggerType: 'linear', staggerStep: 40, overlapRatio: 0.8, distance: 0, scaleFrom: 1 },
+  slam: { emoji: '💥', label: 'Slam', color: '#dc2626', bg: 'rgba(220,38,38,0.15)', baseDelay: 10, baseDuration: 200, easingName: 'Hard Impact', easingCB: 'cubic-bezier(1, 0, 1, 1)', cbValues: [1, 0, 1, 1], staggerType: 'linear', staggerStep: 20, overlapRatio: 0.1, distance: 80, scaleFrom: 1.2 },
+  drift: { emoji: '⛵', label: 'Drift', color: '#3b82f6', bg: 'rgba(59,130,246,0.15)', baseDelay: 250, baseDuration: 2000, easingName: 'Long Sine', easingCB: 'cubic-bezier(0.45, 0, 0.55, 1)', cbValues: [0.45, 0, 0.55, 1], staggerType: 'accelerating', staggerStep: 400, overlapRatio: 0.95, distance: 10, scaleFrom: 0.99 },
+  pop: { emoji: '🍾', label: 'Pop', color: '#14b8a6', bg: 'rgba(20,184,166,0.15)', baseDelay: 50, baseDuration: 300, easingName: 'Popper', easingCB: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)', cbValues: [0.175, 0.885, 0.32, 1.275], staggerType: 'decelerating', staggerStep: 40, overlapRatio: 0.4, distance: 0, scaleFrom: 0.5 },
+  slinky: { emoji: '🌀', label: 'Slinky', color: '#8b5cf6', bg: 'rgba(139,92,246,0.15)', baseDelay: 100, baseDuration: 550, easingName: 'Elastic Out', easingCB: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)', cbValues: [0.68, -0.55, 0.27, 1.55], staggerType: 'linear', staggerStep: 150, overlapRatio: 0.2, distance: 20, scaleFrom: 0.9 },
+  zoom: { emoji: '🔍', label: 'Zoom', color: '#f97316', bg: 'rgba(249,115,22,0.15)', baseDelay: 80, baseDuration: 350, easingName: 'Zoom In', easingCB: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)', cbValues: [0.25, 0.46, 0.45, 0.94], staggerType: 'linear', staggerStep: 50, overlapRatio: 0.7, distance: 0, scaleFrom: 0.1 },
+  
+  ...Array.from({length: 31}).reduce((acc, _, i) => {
+    const names = ['Bounce', 'Slap', 'Glide', 'Tension', 'Hover', 'Sneak', 'Burst', 'Drop', 'Rise', 'Twitch'];
+    const emojis = ['🏀', '✋', '🦅', '🏹', '🛸', '🥷', '🎆', '💧', '🌅', '👀'];
+    const colors = ['#f87171', '#fb923c', '#fbbf24', '#a3e635', '#4ade80', '#34d399', '#2dd4bf', '#38bdf8', '#818cf8', '#c084fc'];
+    const name = names[i % names.length] + ' ' + (Math.floor(i/10) + 1);
+    acc['preset' + (20+i)] = {
+      emoji: emojis[i % emojis.length], label: name, color: colors[i % colors.length], bg: colors[i % colors.length] + '26',
+      baseDelay: 50 + (i * 5), baseDuration: 300 + (i * 20),
+      easingName: 'Generated ' + i, easingCB: 'cubic-bezier(0.4, 0, 0.2, 1)', cbValues: [0.4, 0, 0.2, 1],
+      staggerType: i % 2 === 0 ? 'linear' : 'accelerating', staggerStep: 50 + i, overlapRatio: 0.5 + (i % 4)*0.1, distance: 10 + i, scaleFrom: 0.8 + (i%5)*0.05
+    };
+    return acc;
