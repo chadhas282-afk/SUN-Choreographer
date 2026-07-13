@@ -218,3 +218,23 @@ function renderElementList() {
     item.addEventListener('drop', (e) => {
       e.stopPropagation();
       item.classList.remove('drag-over-top', 'drag-over-bottom');
+      const fromStr = e.dataTransfer.getData('text/plain');
+      if (!fromStr) return false;
+      const fromIndex = parseInt(fromStr, 10);
+      let toIndex = i;
+      
+      const rect = item.getBoundingClientRect();
+      const mid = rect.top + rect.height / 2;
+      if (e.clientY >= mid) toIndex++;
+      
+      if (fromIndex < toIndex) toIndex--; 
+      
+      if (fromIndex !== toIndex && fromIndex >= 0 && fromIndex < state.elements.length) {
+        const [movedElement] = state.elements.splice(fromIndex, 1);
+        state.elements.splice(toIndex, 0, movedElement);
+        renderElementList();
+      }
+      return false;
+    });
+
+    const handle = el('span', { className: 'el-drag-handle', 'aria-hidden': 'true' }, '⠿');
