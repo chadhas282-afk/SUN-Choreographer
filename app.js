@@ -278,3 +278,23 @@ function addElement() {
   if (!rawId) {
     idInput.focus();
     idInput.style.borderColor = 'var(--accent-rose)';
+    setTimeout(() => { idInput.style.borderColor = ''; }, 1200);
+    return;
+  }
+
+  const safeId = sanitiseId(rawId);
+  const type   = typeEl.value;
+  const ent    = entrance.value;
+
+  state.elements.push({ id: safeId, type, entrance: ent });
+  idInput.value = '';
+  idInput.focus();
+  renderElementList();
+}
+
+function resolveEntrance(element) {
+  let ent = element.entrance !== 'auto' ? element.entrance : (TYPE_DEFAULTS[element.type] || 'fade');
+  
+  if (ent.startsWith('slide-') || ent === 'scale') {
+    if (state.direction === 'center') return 'scale';
+    if (state.direction === 'up') return 'slide-up';
