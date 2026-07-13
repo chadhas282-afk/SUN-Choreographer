@@ -418,3 +418,23 @@ function generateCSS(choreography) {
 }
 
 function generateKeyframe(entrance, presetCfg) {
+  const d = Math.round(presetCfg.distance * state.tuning.distance);
+  const s = presetCfg.scaleFrom;
+  const lines = [];
+  lines.push(`@keyframes anim-${entrance} {`);
+  switch (entrance) {
+    case 'fade':
+      lines.push('  from { opacity: 0; filter: blur(12px); }');
+      lines.push('  to   { opacity: 1; filter: blur(0); }');
+      break;
+    case 'slide-up':
+      lines.push(`  from { opacity: 0; filter: blur(8px); transform: perspective(1000px) rotateX(-12deg) translateY(${d}px); }`);
+      lines.push('  to   { opacity: 1; filter: blur(0); transform: perspective(1000px) rotateX(0) translateY(0); }');
+      break;
+    case 'slide-down':
+      lines.push(`  from { opacity: 0; filter: blur(8px); transform: perspective(1000px) rotateX(12deg) translateY(-${d}px); }`);
+      lines.push('  to   { opacity: 1; filter: blur(0); transform: perspective(1000px) rotateX(0) translateY(0); }');
+      break;
+    case 'slide-left':
+      lines.push(`  from { opacity: 0; filter: blur(8px); transform: perspective(1000px) rotateY(-12deg) translateX(-${d}px); }`);
+      lines.push('  to   { opacity: 1; filter: blur(0); transform: perspective(1000px) rotateY(0) translateX(0); }');
