@@ -678,3 +678,23 @@ function buildPreviewCSS(choreography) {
   lines.push('@media (prefers-reduced-motion: reduce) {');
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
+    const rmDur  = Math.round(row.duration * 0.4);
+    const rmDlay = Math.round(row.delay * 0.3);
+    lines.push(`  #pv-${i} { animation: prev-fade ${rmDur}ms ease ${rmDlay}ms both; }`);
+  }
+  lines.push('}');
+
+  return lines.join('\n');
+}
+
+function injectPreviewStyles(choreography) {
+  const existing = document.getElementById('mc-preview-anim');
+  if (existing) existing.remove();
+  const style = document.createElement('style');
+  style.id = 'mc-preview-anim';
+  style.textContent = buildPreviewCSS(choreography); 
+  document.head.appendChild(style);
+}
+
+function replayPreview(choreography) {
+  
