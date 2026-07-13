@@ -598,3 +598,23 @@ function buildPreviewVisual(type) {
       v.appendChild(el('div', { className: 'prev-card-line prev-card-line-short' }));
       return v;
     }
+    case 'icon': {
+      const v = el('div', { className: 'prev-vis-icon', 'aria-hidden': 'true' });
+      v.innerHTML = '<img src="logo.jpg" style="width: 100%; height: 100%; object-fit: contain; border-radius: 4px;" alt="icon"/>';
+      return v;
+    }
+    case 'badge': {
+      const v = el('div', { className: 'prev-vis-badge' });
+      v.appendChild(el('div', { className: 'prev-badge-dot' }));
+      v.appendChild(el('div', { className: 'prev-badge-text' }));
+      return v;
+    }
+    case 'nav': {
+      const v = el('div', { className: 'prev-vis-nav' });
+      v.appendChild(el('div', { className: 'prev-nav-logo' }));
+      v.appendChild(el('div', { className: 'prev-nav-spacer' }));
+      for (let i = 0; i < 3; i++) v.appendChild(el('div', { className: 'prev-nav-link' }));
+      return v;
+    }
+    default:
+      return el('div', { className: 'prev-vis-button' });
