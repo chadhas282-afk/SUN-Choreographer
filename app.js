@@ -258,3 +258,23 @@ function renderElementList() {
       className: 'el-delete', type: 'button',
       'aria-label': `Remove ${element.id}`,
     }, '×');
+    delBtn.addEventListener('click', () => {
+      state.elements.splice(i, 1);
+      renderElementList();
+    });
+
+    append(item, handle, num, info, delBtn);
+    list.appendChild(item);
+  });
+}
+
+function addElement() {
+  const idInput  = document.getElementById('new-el-id');
+  const typeEl   = document.getElementById('new-el-type');
+  const entrance = document.getElementById('new-el-entrance');
+  if (!idInput || !typeEl || !entrance) return;
+
+  const rawId = idInput.value.trim();
+  if (!rawId) {
+    idInput.focus();
+    idInput.style.borderColor = 'var(--accent-rose)';
