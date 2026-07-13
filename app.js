@@ -558,3 +558,23 @@ function buildEasingCurveSVG(cb, color) {
     `  <line x1="${ex}" y1="${ey}" x2="${c2x}" y2="${c2y}" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,3"/>`,
     
     `  <circle cx="${c1x}" cy="${c1y}" r="2.5" fill="${color}" opacity="0.5"/>`,
+    `  <circle cx="${c2x}" cy="${c2y}" r="2.5" fill="${color}" opacity="0.5"/>`,
+    
+    `  <path d="M ${sx} ${sy} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${ex} ${ey}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round"/>`,
+    
+    `  <circle cx="${sx}" cy="${sy}" r="3" fill="${color}"/>`,
+    `  <circle cx="${ex}" cy="${ey}" r="3" fill="${color}"/>`,
+    `</svg>`,
+  ].join('\n');
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(svgStr, 'image/svg+xml');
+  return doc.documentElement;
+}
+
+function buildPreviewVisual(type) {
+  switch (type) {
+    case 'heading': {
+      const v = el('div', { className: 'prev-vis-heading' });
+      return v;
+    }
