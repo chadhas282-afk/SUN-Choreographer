@@ -198,3 +198,23 @@ function renderElementList() {
         el.classList.remove('drag-over-top', 'drag-over-bottom');
       });
     });
+    item.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      const rect = item.getBoundingClientRect();
+      const mid = rect.top + rect.height / 2;
+      if (e.clientY < mid) {
+        item.classList.add('drag-over-top');
+        item.classList.remove('drag-over-bottom');
+      } else {
+        item.classList.add('drag-over-bottom');
+        item.classList.remove('drag-over-top');
+      }
+      return false;
+    });
+    item.addEventListener('dragleave', () => {
+      item.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+    item.addEventListener('drop', (e) => {
+      e.stopPropagation();
+      item.classList.remove('drag-over-top', 'drag-over-bottom');
