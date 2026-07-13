@@ -398,3 +398,23 @@ function generateCSS(choreography) {
     lines.push(`  animation: anim-${row.entrance} ${row.duration}ms ${row.easing} ${row.delay}ms both;`);
     lines.push(`  will-change: transform, opacity;`);
     lines.push(`}`);
+    lines.push('');
+  }
+
+  lines.push('@media (prefers-reduced-motion: reduce) {');
+  for (const row of rows) {
+    lines.push(`  #${row.element.id} {`);
+    lines.push(`    animation: anim-fade-only ${Math.round(row.duration * 0.4)}ms ease ${Math.round(row.delay * 0.3)}ms both;`);
+    lines.push(`  }`);
+  }
+  lines.push(`}`);
+  lines.push('');
+  lines.push('@keyframes anim-fade-only {');
+  lines.push('  from { opacity: 0; }');
+  lines.push('  to   { opacity: 1; }');
+  lines.push('}');
+
+  return lines.join('\n');
+}
+
+function generateKeyframe(entrance, presetCfg) {
