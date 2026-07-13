@@ -438,3 +438,23 @@ function generateKeyframe(entrance, presetCfg) {
     case 'slide-left':
       lines.push(`  from { opacity: 0; filter: blur(8px); transform: perspective(1000px) rotateY(-12deg) translateX(-${d}px); }`);
       lines.push('  to   { opacity: 1; filter: blur(0); transform: perspective(1000px) rotateY(0) translateX(0); }');
+      break;
+    case 'slide-right':
+      lines.push(`  from { opacity: 0; filter: blur(8px); transform: perspective(1000px) rotateY(12deg) translateX(${d}px); }`);
+      lines.push('  to   { opacity: 1; filter: blur(0); transform: perspective(1000px) rotateY(0) translateX(0); }');
+      break;
+    case 'scale':
+      lines.push(`  from { opacity: 0; filter: blur(8px); transform: scale(${s}); }`);
+      lines.push('  to   { opacity: 1; filter: blur(0); transform: scale(1); }');
+      break;
+    case 'rotate':
+      lines.push(`  from { opacity: 0; filter: blur(8px); transform: perspective(1000px) rotate(-8deg) rotateX(-12deg) scale(${s}); }`);
+      lines.push('  to   { opacity: 1; filter: blur(0); transform: perspective(1000px) rotate(0deg) rotateX(0) scale(1); }');
+      break;
+    default:
+      lines.push('  from { opacity: 0; filter: blur(12px); }');
+      lines.push('  to   { opacity: 1; filter: blur(0); }');
+  }
+  lines.push('}');
+  return lines;
+}
