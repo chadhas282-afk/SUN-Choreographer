@@ -298,3 +298,23 @@ function resolveEntrance(element) {
   if (ent.startsWith('slide-') || ent === 'scale') {
     if (state.direction === 'center') return 'scale';
     if (state.direction === 'up') return 'slide-up';
+    if (state.direction === 'down') return 'slide-down';
+    if (state.direction === 'left') return 'slide-left';
+    if (state.direction === 'right') return 'slide-right';
+  }
+  
+  return ent;
+}
+
+function computeStaggerDelay(index, preset, total) {
+  const cfg = PRESETS[preset];
+  
+  const base = Math.round(cfg.baseDelay / state.tuning.speed);
+  
+  const overlap = cfg.overlapRatio * state.tuning.overlap;
+  const step = Math.round(cfg.staggerStep / state.tuning.speed);
+
+  switch (cfg.staggerType) {
+    case 'linear':
+      return Math.round(base + index * step * overlap);
+    case 'accelerating': {
