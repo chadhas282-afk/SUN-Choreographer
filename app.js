@@ -618,3 +618,23 @@ function buildPreviewVisual(type) {
     }
     default:
       return el('div', { className: 'prev-vis-button' });
+      }
+}
+
+function buildPreviewCSS(choreography) {
+  const { rows, presetCfg } = choreography;
+  const lines = [];
+
+  const entrances = [...new Set(rows.map(r => r.entrance))];
+  for (const entrance of entrances) {
+    const d = presetCfg.distance;
+    const s = presetCfg.scaleFrom;
+    lines.push(`@keyframes prev-${entrance} {`);
+    switch (entrance) {
+      case 'fade':
+        lines.push('  from { opacity:0; filter: blur(12px); }');
+        lines.push('  to   { opacity:1; filter: blur(0); }');
+        break;
+      case 'slide-up':
+        lines.push(`  from { opacity:0; filter: blur(8px); transform:perspective(1000px) rotateX(-12deg) translateY(${d}px); }`);
+        lines.push('  to   { opacity:1; filter: blur(0); transform:perspective(1000px) rotateX(0) translateY(0); }');
