@@ -378,3 +378,23 @@ function generateChoreography() {
     presetCfg: cfg,
   };
 }
+
+function generateCSS(choreography) {
+  const { rows, presetCfg } = choreography;
+  const lines = [];
+
+  lines.push('/* ─── prefers-reduced-motion override at bottom ─── */');
+  lines.push('');
+
+  const entrances = [...new Set(rows.map(r => r.entrance))];
+  for (const entrance of entrances) {
+    lines.push(...generateKeyframe(entrance, presetCfg));
+    lines.push('');
+  }
+
+  lines.push('/* ─── Element Animation Rules ─── */');
+  for (const row of rows) {
+    lines.push(`#${row.element.id} {`);
+    lines.push(`  animation: anim-${row.entrance} ${row.duration}ms ${row.easing} ${row.delay}ms both;`);
+    lines.push(`  will-change: transform, opacity;`);
+    lines.push(`}`);
