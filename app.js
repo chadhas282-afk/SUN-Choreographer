@@ -538,3 +538,23 @@ function buildEasingCurveSVG(cb, color) {
   const iW = W - PAD * 2, iH = H - PAD * 2;
 
   const toSVG = (px, py) => [
+    PAD + px * iW,
+    PAD + (1 - py) * iH,
+  ];
+
+  const [sx, sy] = [PAD, PAD + iH]; 
+  const [ex, ey] = [PAD + iW, PAD]; 
+  const [c1x, c1y] = toSVG(x1, y1);
+  const [c2x, c2y] = toSVG(x2, y2);
+
+  const svgStr = [
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}">`,
+    `  <rect width="${W}" height="${H}" fill="rgba(0,0,0,0)" rx="4"/>`,
+    
+    `  <line x1="${PAD}" y1="${PAD}" x2="${PAD}" y2="${PAD + iH}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`,
+    `  <line x1="${PAD}" y1="${PAD + iH}" x2="${PAD + iW}" y2="${PAD + iH}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`,
+    
+    `  <line x1="${sx}" y1="${sy}" x2="${c1x}" y2="${c1y}" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,3"/>`,
+    `  <line x1="${ex}" y1="${ey}" x2="${c2x}" y2="${c2y}" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,3"/>`,
+    
+    `  <circle cx="${c1x}" cy="${c1y}" r="2.5" fill="${color}" opacity="0.5"/>`,
