@@ -337,3 +337,23 @@ function computeDuration(element, preset) {
   let base = cfg.baseDuration;
   if (element.type === 'heading') base = Math.round(base * 1.1);
   if (element.type === 'icon' || element.type === 'badge') base = Math.round(base * 0.8);
+
+  return Math.round(base / state.tuning.speed);
+}
+
+function getAnimProperties(entrance, preset) {
+  const cfg = PRESETS[preset];
+  const d   = Math.round(cfg.distance * state.tuning.distance);
+  const s   = cfg.scaleFrom;
+
+  switch (entrance) {
+    case 'fade':        return `opacity: 0 → 1`;
+    case 'slide-up':    return `opacity: 0→1, translateY(${d}px → 0)`;
+    case 'slide-down':  return `opacity: 0→1, translateY(-${d}px → 0)`;
+    case 'slide-left':  return `opacity: 0→1, translateX(-${d}px → 0)`;
+    case 'slide-right': return `opacity: 0→1, translateX(${d}px → 0)`;
+    case 'scale':       return `opacity: 0→1, scale(${s} → 1)`;
+    case 'rotate':      return `opacity: 0→1, rotate(-8deg→0), scale(${s}→1)`;
+    default:            return `opacity: 0 → 1`;
+  }
+}
