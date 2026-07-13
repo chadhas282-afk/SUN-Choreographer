@@ -478,3 +478,22 @@ function generateGSAP(choreography) {
   lines.push('// Set initial states');
   for (const row of rows) {
     const fromVars = buildGSAPFromVars(row.entrance, presetCfg);
+     lines.push(`gsap.set("#${row.element.id}", ${JSON.stringify(fromVars)});`);
+  }
+  lines.push('');
+  lines.push('// Staggered timeline (delays are relative to tl start = 0)');
+  for (const row of rows) {
+    const toVars = buildGSAPToVars(row.entrance, row.duration, presetCfg);
+    const delayStr = (row.delay / 1000).toFixed(3);
+    lines.push(`tl.to("#${row.element.id}", ${JSON.stringify(toVars)}, ${delayStr}); // ${row.element.type}`);
+  }
+  lines.push('');
+  lines.push('// ─── Reduced motion fallback ───');
+  lines.push('if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {');
+  lines.push('  tl.clear();');
+  for (const row of rows) {
+    const delayStr = (row.delay * 0.3 / 1000).toFixed(3);
+    const dur = Math.round(row.duration * 0.4);
+    lines.push(`  tl.to("#${row.element.id}", { opacity: 1, duration: ${(dur/1000).toFixed(2)}, ease: "none" }, ${delayStr});`);
+  }
+  lines.push('}');
