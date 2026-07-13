@@ -178,3 +178,23 @@ function renderElementList() {
     t.style.cssText = 'font-size:0.8rem;color:var(--text-muted);padding:8px 0;display:block;';
     empty.appendChild(t);
     list.appendChild(empty);
+    return;
+  }
+
+  let dragSrcEl = null;
+
+  state.elements.forEach((element, i) => {
+    const item = el('div', { className: 'element-item', role: 'listitem', draggable: 'true' });
+
+    item.addEventListener('dragstart', (e) => {
+      dragSrcEl = item;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', i.toString());
+      setTimeout(() => item.classList.add('dragging'), 0);
+    });
+    item.addEventListener('dragend', () => {
+      item.classList.remove('dragging');
+      list.querySelectorAll('.element-item').forEach(el => {
+        el.classList.remove('drag-over-top', 'drag-over-bottom');
+      });
+    });
