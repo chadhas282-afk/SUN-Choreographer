@@ -117,3 +117,24 @@ function renderPresetGrid(targetId, showAll) {
   const grid = document.getElementById(targetId);
   if (!grid) return;
   grid.replaceChildren();
+
+    const entries = Object.entries(PRESETS);
+  
+  let visibleEntries = [];
+  if (showAll) {
+    visibleEntries = entries;
+  } else {
+    
+    visibleEntries = entries.slice(0, 8);
+    const selectedIdx = entries.findIndex(([k]) => k === state.preset);
+    if (selectedIdx >= 8) {
+      visibleEntries[7] = entries[selectedIdx];
+    }
+  }
+
+  for (const [key, preset] of visibleEntries) {
+    const pill = el('div', {
+      className: `preset-card${state.preset === key ? ' active' : ''}`,
+      role: 'radio',
+      'aria-checked': state.preset === key ? 'true' : 'false',
+      tabindex: '0',
