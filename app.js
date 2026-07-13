@@ -318,3 +318,22 @@ function computeStaggerDelay(index, preset, total) {
     case 'linear':
       return Math.round(base + index * step * overlap);
     case 'accelerating': {
+      let delay = base;
+      for (let i = 0; i < index; i++) delay += Math.round(step * Math.pow(1.15, i) * overlap);
+      return Math.round(delay);
+    }
+    case 'decelerating': {
+      let delay = base;
+      for (let i = 0; i < index; i++) delay += Math.round(step * Math.pow(0.82, i) * overlap + 30);
+      return Math.round(delay);
+    }
+    default:
+      return Math.round(base + index * step * overlap);
+  }
+}
+
+function computeDuration(element, preset) {
+  const cfg = PRESETS[preset];
+  let base = cfg.baseDuration;
+  if (element.type === 'heading') base = Math.round(base * 1.1);
+  if (element.type === 'icon' || element.type === 'badge') base = Math.round(base * 0.8);
