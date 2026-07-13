@@ -517,3 +517,24 @@ function buildGSAPFromVars(entrance, cfg) {
     default:            return { opacity: 0, filter: 'blur(12px)' };
   }
 }
+
+function buildGSAPToVars(entrance, duration, cfg) {
+  const dur = parseFloat((duration / 1000).toFixed(3));
+  const base = { opacity: 1, filter: 'blur(0px)', duration: dur };
+  switch (entrance) {
+    case 'slide-up':    return { ...base, y: 0, rotateX: 0 };
+    case 'slide-down':  return { ...base, y: 0, rotateX: 0 };
+    case 'slide-left':  return { ...base, x: 0, rotateY: 0 };
+    case 'slide-right': return { ...base, x: 0, rotateY: 0 };
+    case 'scale':       return { ...base, scale: 1 };
+    case 'rotate':      return { ...base, rotation: 0, rotateX: 0, scale: 1 };
+    default:            return base;
+  }
+}
+
+function buildEasingCurveSVG(cb, color) {
+  const [x1, y1, x2, y2] = cb;
+  const W = 120, H = 80, PAD = 10;
+  const iW = W - PAD * 2, iH = H - PAD * 2;
+
+  const toSVG = (px, py) => [
