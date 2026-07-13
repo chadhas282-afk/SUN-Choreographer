@@ -578,3 +578,23 @@ function buildPreviewVisual(type) {
       const v = el('div', { className: 'prev-vis-heading' });
       return v;
     }
+    case 'text': {
+      const v = el('div', { className: 'prev-vis-text' });
+      const widths = ['100%', '80%', '62%'];
+      for (const w of widths) {
+        const line = el('div', { className: 'prev-text-line' });
+        line.style.width = w;
+        v.appendChild(line);
+      }
+      return v;
+    }
+    case 'button':
+      return el('div', { className: 'prev-vis-button' });
+    case 'image':
+      return el('div', { className: 'prev-vis-image' });
+    case 'card': {
+      const v = el('div', { className: 'prev-vis-card' });
+      v.appendChild(el('div', { className: 'prev-card-line' }));
+      v.appendChild(el('div', { className: 'prev-card-line prev-card-line-short' }));
+      return v;
+    }
