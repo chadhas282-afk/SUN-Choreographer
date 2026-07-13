@@ -238,3 +238,23 @@ function renderElementList() {
     });
 
     const handle = el('span', { className: 'el-drag-handle', 'aria-hidden': 'true' }, '⠿');
+    const num    = el('span', { className: 'el-number' }, String(i + 1).padStart(2, '0'));
+
+    const info   = el('div', { className: 'el-info' });
+    const idSpan = el('span', { className: 'el-id' }, element.id);
+    const meta   = el('div', { className: 'el-meta' });
+
+    const resolvedEntrance = element.entrance === 'auto'
+      ? TYPE_DEFAULTS[element.type] || 'fade'
+      : element.entrance;
+
+    const tagType     = el('span', { className: 'el-tag el-tag-type' }, element.type);
+    const tagEntrance = el('span', { className: 'el-tag el-tag-entrance' },
+      element.entrance === 'auto' ? `auto → ${resolvedEntrance}` : element.entrance);
+    append(meta, tagType, tagEntrance);
+    append(info, idSpan, meta);
+
+    const delBtn = el('button', {
+      className: 'el-delete', type: 'button',
+      'aria-label': `Remove ${element.id}`,
+    }, '×');
