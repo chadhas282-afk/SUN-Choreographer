@@ -458,3 +458,23 @@ function generateKeyframe(entrance, presetCfg) {
   lines.push('}');
   return lines;
 }
+
+function generateGSAP(choreography) {
+  const { rows, presetCfg } = choreography;
+  const lines = [];
+
+  lines.push('// ─── SUN Choreographer — GSAP Sequence ───');
+  lines.push('// Requires GSAP 3.x: https://greensock.com/gsap/');
+  lines.push('// npm install gsap');
+  lines.push('');
+  lines.push(`import { gsap } from 'gsap';`);
+  lines.push('');
+  lines.push('const tl = gsap.timeline({');
+  lines.push('  defaults: {');
+  lines.push(`    ease: "${presetCfg.easingCB}",`);
+  lines.push('  },');
+  lines.push('});');
+  lines.push('');
+  lines.push('// Set initial states');
+  for (const row of rows) {
+    const fromVars = buildGSAPFromVars(row.entrance, presetCfg);
