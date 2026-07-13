@@ -138,3 +138,23 @@ function renderPresetGrid(targetId, showAll) {
       role: 'radio',
       'aria-checked': state.preset === key ? 'true' : 'false',
       tabindex: '0',
+      'data-preset': key,
+    });
+    pill.style.cssText = state.preset === key
+      ? `background:${preset.bg};border-color:${preset.color};color:${preset.color};`
+      : '';
+
+    const emoji = el('span', { className: 'preset-card-emoji', 'aria-hidden': 'true' }, preset.emoji);
+    const name  = el('span', { className: 'preset-card-name' }, preset.label);
+    append(pill, emoji, name);
+
+    pill.addEventListener('click', () => { 
+      state.preset = key; 
+      renderPresetGrid('preset-grid', false);
+      renderPresetGrid('modal-preset-grid', true);
+      document.getElementById('presets-modal')?.classList.add('hidden');
+    });
+    pill.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { 
+        e.preventDefault(); 
+        state.preset = key; 
