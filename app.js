@@ -158,3 +158,23 @@ function renderPresetGrid(targetId, showAll) {
       if (e.key === 'Enter' || e.key === ' ') { 
         e.preventDefault(); 
         state.preset = key; 
+        renderPresetGrid('preset-grid', false);
+        renderPresetGrid('modal-preset-grid', true);
+        document.getElementById('presets-modal')?.classList.add('hidden');
+      }
+    });
+    grid.appendChild(pill);
+  }
+}
+
+function renderElementList() {
+  const list = document.getElementById('element-list');
+  if (!list) return;
+  list.replaceChildren();
+
+  if (state.elements.length === 0) {
+    const empty = el('div', { className: 'el-empty' });
+    const t = el('span', {}, 'No elements yet. Add one below.');
+    t.style.cssText = 'font-size:0.8rem;color:var(--text-muted);padding:8px 0;display:block;';
+    empty.appendChild(t);
+    list.appendChild(empty);
