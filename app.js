@@ -698,3 +698,103 @@ function injectPreviewStyles(choreography) {
 
 function replayPreview(choreography) {
   
+  const style = document.getElementById('mc-preview-anim');
+  if (style) style.remove();
+
+  const prevEls = document.querySelectorAll('.prev-el-wrap');
+  prevEls.forEach(node => {
+    node.style.opacity = '0';
+    node.style.transform = '';
+    node.style.animation = 'none';
+  });
+
+  void document.getElementById('preview-canvas')?.offsetHeight;
+
+  setTimeout(() => {
+    prevEls.forEach(node => { node.style.animation = ''; });
+    injectPreviewStyles(choreography);
+    runPreviewProgress(choreography);
+  }, 60);
+}
+
+function runPreviewProgress(choreography) {
+  const fill  = document.getElementById('preview-progress-fill');
+  const timer = document.getElementById('preview-timer');
+  if (!fill) return;
+
+  const total = choreography.totalDuration;
+  let start = null;
+
+  function tick(now) {
+    if (!start) start = now;
+    const elapsed = now - start;
+    const pct = Math.min((elapsed / total) * 100, 100);
+    fill.style.width = pct + '%';
+    if (timer) timer.textContent = Math.min(Math.round(elapsed), total) + 'ms';
+    if (pct < 100) requestAnimationFrame(tick);
+    else { if (timer) timer.textContent = total + 'ms'; }
+  }
+  fill.style.width = '0%';
+  requestAnimationFrame(tick);
+}
+
+function buildPreviewSection(choreography) {
+  const { rows, totalDuration, presetCfg } = choreography;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const sec = el('div', { className: 'out-section preview-section' });
+
+  const header = el('div', { className: 'preview-header' });
+
+  const left = el('div', { className: 'preview-header-left' });
+  const dots = el('div', { className: 'preview-header-dot', 'aria-hidden': 'true' });
+  append(dots,
+    el('div', { className: 'preview-dot preview-dot-r' }),
+    el('div', { className: 'preview-dot preview-dot-y' }),
+    el('div', { className: 'preview-dot preview-dot-g' }),
+  );
+  const title = el('span', { className: 'preview-title' }, 'Live Preview');
+  append(left, dots, title);
+
+  const replayBtn = el('button', {
+    className: 'preview-btn-replay',
+    type: 'button',
+    id: 'btn-replay-preview',
+    'aria-label': 'Replay preview animation',
+  });
+  
+  const svgStr = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.99"/></svg>';
+  const parser = new DOMParser();
+  const svgDoc = parser.parseFromString(svgStr, 'image/svg+xml');
+  replayBtn.appendChild(svgDoc.documentElement);
+  replayBtn.appendChild(document.createTextNode(' Replay'));
+  replayBtn.addEventListener('click', () => {
+    replayBtn.classList.add('replaying');
+    replayPreview(choreography);
+    setTimeout(() => replayBtn.classList.remove('replaying'), totalDuration + 400);
+  });
+
+  append(header, left, replayBtn);
+  sec.appendChild(header);
+
+  const stage = el('div', { className: 'preview-stage' });
+  const canvas = el('div', { className: 'preview-canvas', id: 'preview-canvas' });
+
+  const INLINE_TYPES = new Set(['button', 'icon', 'badge']);
+  let currentRow = null;
+
+  rows.forEach((row, i) => {
+    const isInline = INLINE_TYPES.has(row.element.type);
+    const wrap = el('div', { className: 'prev-el-wrap', id: `pv-${i}` });
+
+    const visual = buildPreviewVisual(row.element.type);
+    wrap.appendChild(visual);
+
+    const label = el('span', { className: 'prev-el-label' });
+    label.textContent = row.element.id;
+    wrap.appendChild(label);
+
+    if (isInline) {
+      
+      if (!currentRow) {
+        currentRow = el('div', { className: 'preview-row' });
