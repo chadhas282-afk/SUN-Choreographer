@@ -658,3 +658,23 @@ function buildPreviewCSS(choreography) {
       case 'rotate':
         lines.push(`  from { opacity:0; filter: blur(8px); transform:perspective(1000px) rotate(-8deg) rotateX(-12deg) scale(${s}); }`);
         lines.push('  to   { opacity:1; filter: blur(0); transform:perspective(1000px) rotate(0deg) rotateX(0) scale(1); }');
+        break;
+      default:
+        lines.push('  from { opacity:0; filter: blur(12px); }');
+        lines.push('  to   { opacity:1; filter: blur(0); }');
+    }
+    lines.push('}');
+    lines.push('');
+  }
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    lines.push(`#pv-${i} {`);
+    lines.push(`  animation: prev-${row.entrance} ${row.duration}ms ${row.easing} ${row.delay}ms both;`);
+    lines.push(`}`);
+  }
+
+  lines.push('');
+  lines.push('@media (prefers-reduced-motion: reduce) {');
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
