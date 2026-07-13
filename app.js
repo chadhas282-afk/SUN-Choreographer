@@ -497,3 +497,23 @@ function generateGSAP(choreography) {
     lines.push(`  tl.to("#${row.element.id}", { opacity: 1, duration: ${(dur/1000).toFixed(2)}, ease: "none" }, ${delayStr});`);
   }
   lines.push('}');
+
+  return lines.join('\n');
+}
+
+function buildGSAPFromVars(entrance, cfg) {
+  const d = Math.round(cfg.distance * state.tuning.distance);
+  const s = cfg.scaleFrom;
+  
+  const base = { opacity: 0, filter: 'blur(8px)', transformPerspective: 1000 };
+  switch (entrance) {
+    case 'fade':        return { opacity: 0, filter: 'blur(12px)' };
+    case 'slide-up':    return { ...base, y: d, rotateX: -12 };
+    case 'slide-down':  return { ...base, y: -d, rotateX: 12 };
+    case 'slide-left':  return { ...base, x: -d, rotateY: -12 };
+    case 'slide-right': return { ...base, x: d, rotateY: 12 };
+    case 'scale':       return { opacity: 0, filter: 'blur(8px)', scale: s };
+    case 'rotate':      return { ...base, rotation: -8, rotateX: -12, scale: s };
+    default:            return { opacity: 0, filter: 'blur(12px)' };
+  }
+}
