@@ -357,3 +357,24 @@ function getAnimProperties(entrance, preset) {
     default:            return `opacity: 0 → 1`;
   }
 }
+
+function generateChoreography() {
+  const cfg = PRESETS[state.preset];
+  const total = state.elements.length;
+
+  const rows = state.elements.map((element, i) => {
+    const entrance = resolveEntrance(element);
+    const delay    = computeStaggerDelay(i, state.preset, total);
+    const duration = computeDuration(element, state.preset);
+    const animProp = getAnimProperties(entrance, state.preset);
+    return { element, entrance, delay, duration, animProp, easing: cfg.easingCB };
+  });
+
+  const totalDuration = Math.max(...rows.map(r => r.delay + r.duration));
+
+  return {
+    rows, totalDuration,
+    preset: state.preset,
+    presetCfg: cfg,
+  };
+}
