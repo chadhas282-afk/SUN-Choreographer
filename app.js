@@ -818,3 +818,23 @@ function buildPreviewSection(choreography) {
   const barBg = el('div', { className: 'preview-progress-bar-bg' });
   const barFill = el('div', { className: 'preview-progress-fill', id: 'preview-progress-fill' });
   barBg.appendChild(barFill);
+  append(progWrap, barBg, progLabels);
+  sec.appendChild(progWrap);
+
+  sec.dataset.ready = '1';
+  return sec;
+}
+
+function renderOutput(choreography) {
+  const { rows, presetCfg } = choreography;
+  const content = document.getElementById('output-content');
+  const empty   = document.getElementById('output-empty');
+  if (!content || !empty) return;
+
+  content.replaceChildren();
+
+  const secPreview = buildPreviewSection(choreography);
+
+  const secCode = buildSection('', 'Production Code');
+
+  const tabBar = el('div', { className: 'code-tabs' });
