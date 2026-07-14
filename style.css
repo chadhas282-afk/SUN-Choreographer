@@ -218,3 +218,23 @@ body {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin: 0;
+}
+.panel-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.panel-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.element-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.element-item {
