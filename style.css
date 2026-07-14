@@ -58,3 +58,23 @@ body {
   content: '';
   position: absolute;
   border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  pointer-events: none;
+  animation: breathe 10s ease-in-out infinite;
+}
+.app-container::before {
+  top: -10%; left: -10%; width: 500px; height: 500px;
+  background: rgba(139, 92, 246, 0.15); 
+}
+.app-container::after {
+  bottom: -10%; right: -5%; width: 600px; height: 600px;
+  background: rgba(59, 130, 246, 0.15); 
+  animation-delay: -5s; 
+}
+
+.app-header {
+  height: var(--header-h);
+  background: rgba(8, 8, 15, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
