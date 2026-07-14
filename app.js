@@ -838,3 +838,23 @@ function renderOutput(choreography) {
   const secCode = buildSection('', 'Production Code');
 
   const tabBar = el('div', { className: 'code-tabs' });
+  const cssTabBtn  = el('button', { className: 'code-tab-btn active', type: 'button', id: 'tab-css' }, 'CSS @keyframes');
+  const gsapTabBtn = el('button', { className: 'code-tab-btn', type: 'button', id: 'tab-gsap' }, 'GSAP / JS');
+  append(tabBar, cssTabBtn, gsapTabBtn);
+
+  const cssPanel  = el('div', { className: 'code-panel active', id: 'panel-css' });
+  const gsapPanel = el('div', { className: 'code-panel', id: 'panel-gsap' });
+
+  const cssCode  = generateCSS(choreography);
+  const gsapCode = generateGSAP(choreography);
+
+  cssPanel.appendChild(buildCodeBlock('css', cssCode, 'css-copy'));
+  gsapPanel.appendChild(buildCodeBlock('javascript', gsapCode, 'gsap-copy'));
+
+  cssTabBtn.addEventListener('click', () => {
+    cssTabBtn.className = 'code-tab-btn active';
+    gsapTabBtn.className = 'code-tab-btn';
+    cssPanel.className = 'code-panel active';
+    gsapPanel.className = 'code-panel';
+  });
+  gsapTabBtn.addEventListener('click', () => {
