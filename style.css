@@ -98,3 +98,23 @@ body {
   font-size: 16px; 
   background: var(--accent);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-generate {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 30px; 
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
