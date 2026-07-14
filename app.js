@@ -1097,3 +1097,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const genBtn = document.getElementById('btn-generate');
   genBtn?.addEventListener('click', handleGenerate);
+
+  const setupSlider = (id, stateKey, displayId) => {
+    const slider = document.getElementById(id);
+    const display = document.getElementById(displayId);
+    if (!slider || !display) return;
+    slider.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      state.tuning[stateKey] = val;
+      display.textContent = val.toFixed(1) + 'x';
+    });
+  };
+  setupSlider('range-speed', 'speed', 'val-speed');
+  setupSlider('range-distance', 'distance', 'val-distance');
+  setupSlider('range-overlap', 'overlap', 'val-overlap');
+
+  const dirBtns = document.querySelectorAll('.dir-btn');
+  dirBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      dirBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.direction = btn.getAttribute('data-dir');
