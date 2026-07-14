@@ -958,3 +958,23 @@ function buildStaggerExplanation(cfg, rows) {
   const diffs = delays.slice(1).map((d, i) => d - delays[i]);
 
   if (type === 'linear') {
+    return `Linear stagger: each element starts exactly ${Math.round(cfg.staggerStep * cfg.overlapRatio)}ms after the previous. This creates a consistent, predictable rhythm — elements arrive like frames in a film. Overlap ratio of ${Math.round(cfg.overlapRatio * 100)}% means the next element starts while the previous is still in motion, creating flow rather than a sequence of isolated movements.`;
+  } else if (type === 'accelerating') {
+    return `Accelerating (exponential) stagger: the interval between elements grows with each step (approx ×1.15 per element). The sequence starts dense and spreads out — creating a burst effect that builds excitement, then releases. First gap: ~${diffs[0]}ms. Later gaps: ~${diffs[diffs.length - 1] || diffs[0]}ms. Psychologically, this front-loads visual momentum.`;
+  } else {
+    return `Decelerating stagger: the interval between elements shrinks with each step (approx ×0.82 decay). The sequence starts sparse and converges — like elements being drawn together by a gravitational pull. First gap: ~${diffs[0]}ms. Later gaps: ~${diffs[diffs.length - 1] || diffs[0]}ms. Creates a sense of convergence and arrival.`;
+  }
+}
+
+function runHeroDemoAnimation() {
+  const demoEls = document.querySelectorAll('.demo-el');
+  const tlBars  = document.querySelectorAll('.demo-tl-bar');
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function reset() {
+    demoEls.forEach(el => {
+      el.style.transition = 'none';
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(14px)';
+    });
