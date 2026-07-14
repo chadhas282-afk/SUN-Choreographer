@@ -978,3 +978,23 @@ function runHeroDemoAnimation() {
       el.style.opacity    = '0';
       el.style.transform  = 'translateY(14px)';
     });
+    tlBars.forEach(b => {
+      b.style.transition = 'none';
+      b.style.transform  = 'scaleX(0)';
+    });
+  }
+
+  function play() {
+    const delays = [0, 130, 220, 310, 400];
+    const dur = 600;
+
+    demoEls.forEach((el, i) => {
+      setTimeout(() => {
+        el.style.transition = `opacity ${dur}ms cubic-bezier(0.22,1,0.36,1), transform ${dur}ms cubic-bezier(0.22,1,0.36,1)`;
+        el.style.opacity    = '1';
+        el.style.transform  = 'translateY(0)';
+      }, delays[i]);
+    });
+
+    tlBars.forEach((bar, i) => {
+      setTimeout(() => {
