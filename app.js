@@ -1018,3 +1018,23 @@ function runHeroDemoAnimation() {
     reset();
     setTimeout(play, 400);
   }, 4500);
+  }
+
+function handleGenerate() {
+  if (state.elements.length === 0) {
+    const addBtn = document.getElementById('btn-add-element');
+    if (addBtn) {
+      addBtn.style.borderColor = 'var(--accent-rose)';
+      addBtn.style.color = 'var(--accent-rose)';
+      setTimeout(() => {
+        addBtn.style.borderColor = '';
+        addBtn.style.color = '';
+      }, 1500);
+    }
+    return;
+  }
+
+  const btn = document.getElementById('btn-generate');
+  if (btn) {
+    btn.style.transform = 'scale(0.97)';
+    setTimeout(() => { btn.style.transform = ''; }, 150);
