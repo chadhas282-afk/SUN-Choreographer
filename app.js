@@ -1038,3 +1038,23 @@ function handleGenerate() {
   if (btn) {
     btn.style.transform = 'scale(0.97)';
     setTimeout(() => { btn.style.transform = ''; }, 150);
+     }
+
+  const content = document.getElementById('output-content');
+  const empty   = document.getElementById('output-empty');
+  const loading = document.getElementById('output-loading');
+  const codeTarget = document.getElementById('code-export-target');
+  
+  if (empty) empty.style.display = 'none';
+  if (content) content.style.display = 'none';
+  if (loading) loading.style.display = 'block';
+  if (codeTarget) {
+    codeTarget.innerHTML = '<div class="export-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 1rem;"><div style="animation: spin 2s linear infinite;"><img src="logo.jpg" style="height: 32px; width: 32px; border-radius: 6px; object-fit: cover;" alt="SUN Logo"/></div><div style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">Generating code...</div></div>';
+  }
+
+  setTimeout(() => {
+    if (loading) loading.style.display = 'none';
+    const choreography = generateChoreography();
+    renderOutput(choreography);
+  
+    if (window.innerWidth < 1000) {
