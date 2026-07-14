@@ -878,3 +878,23 @@ function renderOutput(choreography) {
 
   const sections = content.querySelectorAll('.out-section');
   sections.forEach((s, i) => {
+    setTimeout(() => s.classList.add('visible'), i * 80);
+  });
+
+  setTimeout(() => {
+    injectPreviewStyles(choreography);
+    runPreviewProgress(choreography);
+  }, 120);
+}
+
+function buildSection(num, title) {
+  const sec = el('div', { className: 'out-section' });
+  const header = el('div', { className: 'out-section-title' });
+  const numSpan = el('span', { 'aria-hidden': 'true' });
+  numSpan.textContent = num;
+  numSpan.style.cssText = 'font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);';
+  const titleSpan = el('span', {}, title);
+  if (num) {
+    append(header, numSpan, titleSpan);
+  } else {
+    append(header, titleSpan);
