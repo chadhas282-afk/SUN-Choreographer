@@ -38,3 +38,23 @@ body {
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes breathe {
+  0%   { transform: translateY(0) scale(1); opacity: 0.15; }
+  50%  { transform: translateY(-20px) scale(1.05); opacity: 0.25; }
+  100% { transform: translateY(0) scale(1); opacity: 0.15; }
+}
+.app-container::before,
+.app-container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
