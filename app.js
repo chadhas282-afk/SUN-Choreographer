@@ -898,3 +898,23 @@ function buildSection(num, title) {
     append(header, numSpan, titleSpan);
   } else {
     append(header, titleSpan);
+    }
+  sec.appendChild(header);
+  return sec;
+}
+
+function buildCodeBlock(lang, code, copyId) {
+  const wrap = el('div', { className: 'code-block-wrap' });
+  const header = el('div', { className: 'code-block-header' });
+  const langLabel = el('span', { className: 'code-block-lang' }, lang);
+  const copyBtn = el('button', { className: 'code-copy-btn', type: 'button', id: copyId }, 'Copy');
+  append(header, langLabel, copyBtn);
+
+  const pre = el('pre', { className: 'code-pre' });
+  
+  pre.textContent = code;
+
+  append(wrap, header, pre);
+
+  copyBtn.addEventListener('click', () => {
+    
