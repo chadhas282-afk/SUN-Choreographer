@@ -918,3 +918,23 @@ function buildCodeBlock(lang, code, copyId) {
 
   copyBtn.addEventListener('click', () => {
     
+     navigator.clipboard.writeText(code).then(() => {
+      copyBtn.textContent = 'Copied!';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      
+      copyBtn.textContent = 'Failed';
+      setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+    });
+  });
+
+  return wrap;
+}
+
+function buildNoteCard(icon, title, items) {
+  const card = el('div', { className: 'note-card' });
+  const header = el('div', { className: 'note-card-header' });
