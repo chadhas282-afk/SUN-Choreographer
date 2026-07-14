@@ -1058,3 +1058,23 @@ function handleGenerate() {
     renderOutput(choreography);
   
     if (window.innerWidth < 1000) {
+      setTimeout(() => {
+        document.getElementById('tool-output-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    }
+  }, 4000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  renderPresetGrid('preset-grid', false);
+  renderPresetGrid('modal-preset-grid', true);
+  renderElementList();
+
+  const btnMore = document.getElementById('btn-more-presets');
+  const modal = document.getElementById('presets-modal');
+  if (btnMore && modal) {
+    btnMore.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+    });
+  }
