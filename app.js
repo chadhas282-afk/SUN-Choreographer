@@ -38,7 +38,7 @@ const PRESETS = {
     baseDelay: 10, baseDuration: 100,
     easingName: 'Linear Snap', easingCB: 'cubic-bezier(0, 0, 1, 1)', cbValues: [0, 0, 1, 1],
     staggerType: 'linear', staggerStep: 80, overlapRatio: 0.1, distance: 10, scaleFrom: 0.98,
-    },
+  },
   float: {
     emoji: '🎈', label: 'Float', color: '#818cf8', bg: 'rgba(129,140,248,0.15)',
     baseDelay: 300, baseDuration: 1400,
@@ -78,7 +78,7 @@ const PRESETS = {
       staggerType: i % 2 === 0 ? 'linear' : 'accelerating', staggerStep: 50 + i, overlapRatio: 0.5 + (i % 4)*0.1, distance: 10 + i, scaleFrom: 0.8 + (i%5)*0.05
     };
     return acc;
-    }, {})
+  }, {})
 };
 
 const TYPE_DEFAULTS = {
@@ -118,7 +118,7 @@ function renderPresetGrid(targetId, showAll) {
   if (!grid) return;
   grid.replaceChildren();
 
-    const entries = Object.entries(PRESETS);
+  const entries = Object.entries(PRESETS);
   
   let visibleEntries = [];
   if (showAll) {
@@ -478,7 +478,7 @@ function generateGSAP(choreography) {
   lines.push('// Set initial states');
   for (const row of rows) {
     const fromVars = buildGSAPFromVars(row.entrance, presetCfg);
-     lines.push(`gsap.set("#${row.element.id}", ${JSON.stringify(fromVars)});`);
+    lines.push(`gsap.set("#${row.element.id}", ${JSON.stringify(fromVars)});`);
   }
   lines.push('');
   lines.push('// Staggered timeline (delays are relative to tl start = 0)');
@@ -618,7 +618,7 @@ function buildPreviewVisual(type) {
     }
     default:
       return el('div', { className: 'prev-vis-button' });
-      }
+  }
 }
 
 function buildPreviewCSS(choreography) {
@@ -898,7 +898,7 @@ function buildSection(num, title) {
     append(header, numSpan, titleSpan);
   } else {
     append(header, titleSpan);
-    }
+  }
   sec.appendChild(header);
   return sec;
 }
@@ -918,7 +918,7 @@ function buildCodeBlock(lang, code, copyId) {
 
   copyBtn.addEventListener('click', () => {
     
-     navigator.clipboard.writeText(code).then(() => {
+    navigator.clipboard.writeText(code).then(() => {
       copyBtn.textContent = 'Copied!';
       copyBtn.classList.add('copied');
       setTimeout(() => {
@@ -1018,7 +1018,7 @@ function runHeroDemoAnimation() {
     reset();
     setTimeout(play, 400);
   }, 4500);
-  }
+}
 
 function handleGenerate() {
   if (state.elements.length === 0) {
@@ -1038,7 +1038,7 @@ function handleGenerate() {
   if (btn) {
     btn.style.transform = 'scale(0.97)';
     setTimeout(() => { btn.style.transform = ''; }, 150);
-     }
+  }
 
   const content = document.getElementById('output-content');
   const empty   = document.getElementById('output-empty');
@@ -1118,3 +1118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dirBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       state.direction = btn.getAttribute('data-dir');
+    });
+  });
+
+});
