@@ -938,3 +938,23 @@ function buildCodeBlock(lang, code, copyId) {
 function buildNoteCard(icon, title, items) {
   const card = el('div', { className: 'note-card' });
   const header = el('div', { className: 'note-card-header' });
+  const iconEl = el('span', { className: 'note-card-icon', 'aria-hidden': 'true' }, icon);
+  const titleEl = el('span', { className: 'note-card-title' }, title);
+  append(header, iconEl, titleEl);
+  card.appendChild(header);
+
+  const list = el('ul', { className: 'note-list' });
+  for (const item of items) {
+    const li = el('li', {}, item);
+    list.appendChild(li);
+  }
+  card.appendChild(list);
+  return card;
+}
+
+function buildStaggerExplanation(cfg, rows) {
+  const type = cfg.staggerType;
+  const delays = rows.map(r => r.delay);
+  const diffs = delays.slice(1).map((d, i) => d - delays[i]);
+
+  if (type === 'linear') {
