@@ -858,3 +858,23 @@ function renderOutput(choreography) {
     gsapPanel.className = 'code-panel';
   });
   gsapTabBtn.addEventListener('click', () => {
+    gsapTabBtn.className = 'code-tab-btn active';
+    cssTabBtn.className = 'code-tab-btn';
+    gsapPanel.className = 'code-panel active';
+    cssPanel.className = 'code-panel';
+  });
+
+  append(secCode, tabBar, cssPanel, gsapPanel);
+
+  append(content, secPreview);
+
+  const exportTarget = document.getElementById('code-export-target');
+  if (exportTarget) {
+    exportTarget.replaceChildren(secCode);
+  }
+
+  empty.style.display = 'none';
+  content.style.display = 'flex';
+
+  const sections = content.querySelectorAll('.out-section');
+  sections.forEach((s, i) => {
