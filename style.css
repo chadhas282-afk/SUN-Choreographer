@@ -178,3 +178,23 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  background: var(--bg-canvas);
+  position: relative;
+  overflow: hidden;
+}
+.stage-toolbar {
+  height: 40px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  background: var(--bg-sidebar);
+  font-weight: 600;
+}
+.stage-canvas {
+  flex: 1;
+  display: flex;
