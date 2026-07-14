@@ -798,3 +798,23 @@ function buildPreviewSection(choreography) {
       
       if (!currentRow) {
         currentRow = el('div', { className: 'preview-row' });
+        canvas.appendChild(currentRow);
+      }
+      currentRow.appendChild(wrap);
+    } else {
+      currentRow = null; 
+      canvas.appendChild(wrap);
+    }
+  });
+
+  stage.appendChild(canvas);
+  sec.appendChild(stage);
+
+  const progWrap = el('div', { className: 'preview-progress-wrap' });
+  const progLabels = el('div', { className: 'preview-progress-label' });
+  const progStart = el('span', {}, '0ms');
+  const progTimer = el('span', { id: 'preview-timer' }, `${totalDuration}ms`);
+  append(progLabels, progStart, progTimer);
+  const barBg = el('div', { className: 'preview-progress-bar-bg' });
+  const barFill = el('div', { className: 'preview-progress-fill', id: 'preview-progress-fill' });
+  barBg.appendChild(barFill);
