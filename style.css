@@ -198,3 +198,23 @@ body {
 .stage-canvas {
   flex: 1;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-image: radial-gradient(var(--border) 1px, transparent 0);
+  background-size: 24px 24px;
+  overflow: auto;
+}
+
+.panel-flex { flex: 1; }
+.panel-header {
+  padding: 12px 16px;
+  background: var(--bg-sidebar);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.panel-header h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
