@@ -998,3 +998,23 @@ function runHeroDemoAnimation() {
 
     tlBars.forEach((bar, i) => {
       setTimeout(() => {
+        bar.style.transition = `transform ${dur * 0.8}ms cubic-bezier(0.22,1,0.36,1)`;
+        bar.style.transform  = 'scaleX(1)';
+      }, delays[i] + 60);
+    });
+  }
+
+  if (prefersReduced) {
+    
+    demoEls.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+    tlBars.forEach(b  => { b.style.transform = 'scaleX(1)'; });
+    return;
+  }
+
+  reset();
+  setTimeout(play, 1500); 
+
+  setInterval(() => {
+    reset();
+    setTimeout(play, 400);
+  }, 4500);
