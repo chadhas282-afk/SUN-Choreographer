@@ -1078,3 +1078,22 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.classList.remove('hidden');
     });
   }
+
+  const btnCloseModal = document.getElementById('btn-close-modal');
+  if (btnCloseModal && modal) {
+    btnCloseModal.addEventListener('click', () => modal.classList.add('hidden'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.add('hidden');
+    });
+  }
+
+  const addBtn = document.getElementById('btn-add-element');
+  addBtn?.addEventListener('click', addElement);
+
+  const idInput = document.getElementById('new-el-id');
+  idInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addElement();
+  });
+
+  const genBtn = document.getElementById('btn-generate');
+  genBtn?.addEventListener('click', handleGenerate);
