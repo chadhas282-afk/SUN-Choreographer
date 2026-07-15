@@ -378,3 +378,22 @@ body {
 .dir-controls {
   display: flex; background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 2px;
 }
+.dir-btn {
+  flex: 1; background: transparent; border: none; font-size: 14px; padding: 4px 0; cursor: pointer; border-radius: var(--radius-sm); opacity: 0.4;
+}
+.dir-btn:hover { background: var(--bg-sidebar); opacity: 0.8; }
+.dir-btn.active { background: var(--border); opacity: 1; }
+
+.pro-slider {
+  -webkit-appearance: none; width: 100%; height: 4px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 2px; outline: none;
+}
+.pro-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--text-primary); cursor: pointer;
+}
+
+.code-export-panel {
+  flex: 1; overflow-y: auto; padding: 16px; background: var(--bg-panel);
+}
+.export-placeholder {
+  color: var(--text-muted); font-size: 12px; text-align: center; margin-top: 40px;
+}
