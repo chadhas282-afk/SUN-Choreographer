@@ -338,3 +338,23 @@ body {
 .btn-add-element, .btn-more-presets {
   width: 100%; padding: 8px;
   background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--border);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: var(--transition);
+}
+.btn-add-element:hover, .btn-more-presets:hover { 
+  background: rgba(255, 255, 255, 0.08); 
+  color: var(--text-primary); 
+  border-color: var(--accent-purple);
+}
+
+.tuning-controls { display: flex; flex-direction: column; gap: 12px; }
+.tuning-group {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.tuning-label {
+  display: flex; justify-content: space-between;
+  font-size: 10px; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;
+}
