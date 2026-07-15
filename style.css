@@ -558,3 +558,18 @@ body {
 
   .sidebar.left-sidebar {
     order: 1;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    height: auto;
+  }
+
+  .sidebar.right-sidebar {
+    order: 2;
+    border-left: none;
+    height: auto;
+  }
+
+  .preset-grid.modal-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
