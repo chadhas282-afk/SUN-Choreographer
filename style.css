@@ -518,3 +518,23 @@ body {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
   z-index: 1000; display: flex; align-items: center; justify-content: center;
+  opacity: 1; transition: opacity 0.2s;
+}
+.modal-overlay.hidden { opacity: 0; pointer-events: none; }
+.modal-content {
+  background: var(--bg-sidebar); border: 1px solid var(--border); border-radius: var(--radius-md);
+  width: 90%; max-width: 800px; max-height: 80vh; display: flex; flex-direction: column;
+}
+.modal-header { padding: 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.modal-header h2 { font-size: 14px; margin: 0; }
+.btn-icon { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 16px; }
+.btn-icon:hover { color: var(--text-primary); }
+#modal-preset-grid { padding: 16px; overflow-y: auto; }
+
+@media (max-width: 768px) {
+  
+  .app-container {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
