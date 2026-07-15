@@ -438,3 +438,22 @@ body {
   border-radius: var(--radius-lg) var(--radius-lg) 0 0; 
   padding: 10px 16px; 
   display: flex; justify-content: space-between; align-items: center; 
+  }
+.preview-header-left { display: flex; align-items: center; gap: 12px; }
+.preview-header-dot { display: flex; gap: 6px; }
+.preview-dot { width: 10px; height: 10px; border-radius: 50%; }
+.preview-dot-r { background: #ff5f56; }
+.preview-dot-y { background: #ffbd2e; }
+.preview-dot-g { background: #27c93f; }
+.preview-title { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.preview-btn-replay {
+  background: var(--bg-panel); border: 1px solid var(--border);
+  color: var(--text-primary); font-size: 10px; font-weight: 600;
+  padding: 4px 8px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; gap: 4px; cursor: pointer;
+  transition: var(--transition);
+}
+.preview-btn-replay:hover { background: var(--border); color: #fff; }
+.preview-btn-replay.replaying svg { animation: spin 1s linear infinite; }
+@keyframes spin { 100% { transform: rotate(-360deg); } }
